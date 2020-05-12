@@ -19,6 +19,7 @@ const Input = (props) => {
     const onClick = (e) => {
         setList([...list, task]);
         e.target.value = "";
+        document.getElementById('mealInput').value = "";
     };
 
     return (
