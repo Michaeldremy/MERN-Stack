@@ -14,7 +14,7 @@ export default () => {
             setProduct(res.data);
             setLoaded(true);
         })
-    }, [])
+    }, [product])
 
     return (
         <div>

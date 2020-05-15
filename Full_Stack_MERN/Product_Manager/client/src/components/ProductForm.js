@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import { navigate } from '@reach/router';
 
 export default () => {
     const [title, setTitle] = useState("");
