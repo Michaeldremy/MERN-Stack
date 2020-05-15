@@ -28,3 +28,15 @@ module.exports.getPerson = (req, res) => {
     .then(person => res.json(person))
     .catch(err => res.json(err))
 }
+
+module.exports.updatePerson = (req, res) => {
+    Person.findOneAndUpdate({_id: req.params.id}, req.body, {new:true})
+        .then(updatedPerson => res.json(updatedPerson))
+        .catch(err => res.json(err))
+}
+
+module.exports.deletePerson = (request, response) => {
+    Person.deleteOne({ _id: request.params.id })
+    .then(deleteConfirmation => response.json(deleteConfirmation))
+    .catch(err => response.json(err))
+}

@@ -16,11 +16,15 @@ export default () => {
             });
     },[])
 
+    const removeFromDom = personId => {
+        setPeople(people.filter(person => person._id != personId));
+    }
+
     return (
         <div>
             <PersonForm/>
             <div className="pt-5" style={{textAlign:"center"}}>
-                {loaded && <PersonList people={people}/>}
+                {loaded && <PersonList people={people} removeFromDom={removeFromDom}/>}
             </div>
         </div>
     )

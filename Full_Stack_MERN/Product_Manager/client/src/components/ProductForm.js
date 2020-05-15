@@ -3,7 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { navigate } from '@reach/router';
 
-export default () => {
+export default (props) => {
+    const {product, setProduct} = props;
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
@@ -15,7 +16,9 @@ export default () => {
             price,
             description
         })
-            .then(res => console.log(res))
+            .then(res => {console.log(res)
+            // This is copying the list and adding the new item to the list aka appending to the end of the list.
+            setProduct([...product, res.data])})
             .catch(err => console.log(err))
     }
 

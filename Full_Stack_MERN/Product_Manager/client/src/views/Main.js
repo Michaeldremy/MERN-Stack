@@ -6,22 +6,27 @@ import axios from 'axios';
 export default () => {
 
     const [product, setProduct] = useState([]);
+    // Hiding HTML until request has been made succesful
     const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/product')
-        .then(res => {
-            setProduct(res.data);
-            setLoaded(true);
+            .then(res => {
+                setProduct(res.data);
+                setLoaded(true);
         })
-    }, [product])
+    }, [])
+
+    const removeFromDom = productId => {
+        setProduct(product.filter(product => product._id !== productId));
+    }
 
     return (
         <div>
-            <ProductForm />
+            <ProductForm product={product} setProduct={setProduct}/>
             <div className="pt-5">
                 <h2 className="pb-3">All Products</h2>
-                {loaded && <ProductList product = {product}/>}
+                {loaded && <ProductList product = {product} removeFromDom={removeFromDom}/>}
             </div>
         </div>
     )
