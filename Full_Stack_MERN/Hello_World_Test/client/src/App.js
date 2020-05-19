@@ -9,9 +9,9 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Main path="people/"/>
-        <Update path="people/:id/edit"/>
-        <Detail path="people/:id"/>
+        <Main path="person/"/>
+        <Update path="person/:id/edit"/>
+        <Detail path="person/:id"/>
       </Router>
     </div>
   );

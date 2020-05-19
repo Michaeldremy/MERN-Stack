@@ -21,12 +21,20 @@ export default () => {
         setProduct(product.filter(product => product._id !== productId));
     }
 
+    const createProduct = prod => {
+        axios.post('http://localhost:8000/api/newproduct/', prod)
+        .then(res => {
+            setProduct([...product, res.data])
+        })
+    }
+
     return (
         <div>
-            <ProductForm product={product} setProduct={setProduct}/>
+            <ProductForm onSubmitProp={createProduct} initialTitle="" initialPrice="" initialDescription=""/>
             <div className="pt-5">
                 <h2 className="pb-3">All Products</h2>
-                {loaded && <ProductList product = {product} removeFromDom={removeFromDom}/>}
+                {/* We are passing ProductList the product and setProduct state as well as the removeFromDom function */}
+                {loaded && <ProductList product = {product} setProduct = {setProduct} removeFromDom={removeFromDom}/>}
             </div>
         </div>
     )

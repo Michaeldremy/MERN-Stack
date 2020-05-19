@@ -1,25 +1,16 @@
 import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
-import { navigate } from '@reach/router';
 
-export default (props) => {
-    const {product, setProduct} = props;
-    const [title, setTitle] = useState("");
-    const [price, setPrice] = useState("");
-    const [description, setDescription] = useState("");
+export default props => {
+
+    const { initialTitle, initialPrice, initialDescription, onSubmitProp } = props;
+    const [title, setTitle] = useState(initialTitle);
+    const [price, setPrice] = useState(initialPrice);
+    const [description, setDescription] = useState(initialDescription);
 
     const onSubmitHandler = e => {
         e.preventDefault();
-        axios.post('http://localhost:8000/api/newproduct/', {
-            title,
-            price,
-            description
-        })
-            .then(res => {console.log(res)
-            // This is copying the list and adding the new item to the list aka appending to the end of the list.
-            setProduct([...product, res.data])})
-            .catch(err => console.log(err))
+        onSubmitProp({title, price, description});
     }
 
     return (
@@ -28,15 +19,24 @@ export default (props) => {
                 <div className="row text-center pt-4">
                     <div className="col-12 pt-3">
                         <label>Title: </label>
-                        <input type="text" onChange ={(e) => setTitle(e.target.value)}/>
+                        <input type="text" 
+                        name="title"
+                        value={title}
+                        onChange ={(e) => setTitle(e.target.value)}/>
                     </div>
                     <div className="col-12 pt-3">
                         <label>Price: </label>
-                        <input type="number" step="0.01" onChange ={(e) => setPrice(e.target.value)}/>
+                        <input type="number" step="0.01" 
+                        name="price"
+                        value={price}
+                        onChange ={(e) => setPrice(e.target.value)}/>
                     </div>
                     <div className="col-12 pt-3">
                         <label>Description: </label>
-                        <input type="text" onChange ={(e) => setDescription(e.target.value)}/>
+                        <input type="text" 
+                        name="description"
+                        value={description}
+                        onChange ={(e) => setDescription(e.target.value)}/>
                     </div>
                     <div className="col-12 pt-3">
                         <button type="submit" className="btn btn-primary">Add Product</button>

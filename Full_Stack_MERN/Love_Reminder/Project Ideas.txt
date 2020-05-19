@@ -1,0 +1,10 @@
+Potentially use Django for the bulk of your project but you can use React to do more of the design work.
+
+Node server to setup reminders: chron jobs
+
+
+If you want to go full-MERN build out the 
+
+Potential Design Frameworks
+- React ready CSS frameworks
+- Component Libraries

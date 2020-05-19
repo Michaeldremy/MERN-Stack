@@ -1,24 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from '@reach/router';
 import axios from 'axios';
+import DeleteButton from '../components/DeleteButton';
 import {navigate} from '@reach/router';
 
 export default props => {
     const [product, setProduct] = useState({})
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/product/${props.id}`)
+        axios.get(`http://localhost:8000/api/product/` + props.id)
         .then(res => setProduct({
             ...res.data
         }))
-    })
-
-    const deleteProduct = (productId) => {
-        axios.delete('http://localhost:8000/api/product/' + productId)
-        .then(res => {
-            navigate("/")
-        }, [])
-    }
+    }, [])
 
     return(
         <div style={{textAlign:"center"}} className="pt-5">
@@ -28,7 +22,8 @@ export default props => {
             <h2><Link to={"/product/" + product._id + "/edit"}>
                 Edit Product
                 </Link></h2>
-                <button onClick={ (e) => {deleteProduct(product._id)}} className="btn btn-primary">Delete Product</button>
+                {/* Here are just deleting the product and navigating back to the base route */}
+                <DeleteButton productId={product._id} successCallback={() => navigate('/')}/>
         </div>
     )
 }

@@ -6,17 +6,17 @@ export default props => {
     const [person, setPerson] = useState({})
 
     useEffect(() => {
-        axios.get("http://localhost:8000/api/people/" + props.id)
+        axios.get("http://localhost:8000/api/person/" + props.id)
             .then(res => setPerson({
                 ...res.data
             }))
-    }, [props.id])
+    }, [])
 
     return (
         <div style={{textAlign:"center"}} className="pt-5">
             <p>First Name: {person.firstName}</p>
             <p>Last Name: {person.lastName}</p>
-            <Link to={"/people/" + person._id + "/edit"}>
+            <Link to={"/person/" + person._id + "/edit"}>
                 Edit
             </Link>
         </div>

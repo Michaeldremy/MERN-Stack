@@ -1,40 +1,38 @@
 import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
 
-export default () => {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
+export default props => {
+// line 7 is new three item being set as props
+const { initialFirstName, initialLastName, onSubmitProp } = props;
+// line 9 & 10 we are setting state to the first two props above
+const [firstName, setFirstName] = useState(initialFirstName);
+const [lastName, setLastName] = useState(initialLastName);
 
-    const onSubmitHandler = e => {
-        //prevent default behavior of the submit
-        e.preventDefault();
-        //make a post request to create a new person
-        axios.post('http://localhost:8000/api/people', {
-            firstName,
-            lastName
-        })
-            .then(res=>console.log(res))
-            .catch(err=>console.log(err))
-    }
+const onSubmitHandler = e => {
+    e.preventDefault();
+    // Line 15 we are using the last of the 3 new props which has an object of firstName and lastName passed through it
+    onSubmitProp({firstName, lastName});
+}
+
     return (
-        <div>
-            <form onSubmit = {onSubmitHandler}>
-                <div className="container">
-                    <div className="row text-center pt-5">
-                        <div className="col-12 pt-3">
-                            <label>First Name:</label>
-                            <input type="text" onChange = {(e) => setFirstName(e.target.value)}/>
-                        </div>
-                        <div className="col-12 pt-3">
-                            <label>Last Name:</label>
-                            <input type="text" onChange = {(e) => setLastName(e.target.value)}/>
-                        </div>
-                        <div className="col-12 pt-3">
-                            <button type ="submit" className="btn btn-primary">Create User</button>
-                        </div>
-                    </div>
-                </div>
+        <div style={{textAlign:"center"}}>
+            <form onSubmit={onSubmitHandler}>
+                <p>
+                    <label>First Name</label><br />
+                    <input 
+                        type="text" 
+                        name="firstName" value={firstName} 
+                        onChange={(e) => { setFirstName(e.target.value) }} />
+                </p>
+                <p>
+                    <label>Last Name</label><br />
+                    <input 
+                        type="text" 
+                        name="lastName" 
+                        value={lastName} 
+                        onChange={(e) => { setLastName(e.target.value) }} />
+                </p>
+                <input type="submit" />
             </form>
         </div>
     )
