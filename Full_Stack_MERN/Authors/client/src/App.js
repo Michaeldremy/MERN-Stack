@@ -9,6 +9,8 @@ import UpdateAuthor from './views/UpdateAuthor';
 
 function App() {
 
+  // We are setting "author" and "setAuthor" state at the highest level. If we want to use these state variables then we will pass it through props
+  // and pass the state through the component as seen in lines 30 - 32
   const [author, setAuthor] = useState([]);
   const [loaded, setLoaded] = useState(false);
 

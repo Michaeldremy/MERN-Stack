@@ -7,10 +7,6 @@ export default props => {
 
     const {author, setAuthor} = props;
 
-    const removeFromDom = authorId => {
-        setAuthor(author.filter(author => author._id !== authorId));
-    }
-
     return (
         <div>
             <div>
@@ -19,7 +15,7 @@ export default props => {
                 <p>We have quotes by:</p>
             </div>
             <div>
-                <AuthorList author={author} setAuthor={setAuthor} removeFromDom={removeFromDom}/>
+                <AuthorList author={author} setAuthor={setAuthor}/>
             </div>
         </div>
     )

@@ -6,7 +6,7 @@ module.exports.createAuthor = (req, res) => {
         name
     })
     .then(author => res.json(author))
-    .catch(err => res.json(err));
+    .catch(err => res.status(400).json(err));
 }
 
 module.exports.getAllAuthors = (req, res) => {
@@ -22,9 +22,10 @@ module.exports.getOneAuthor = (req, res) => {
 }
 
 module.exports.updateAuthor = (req, res) => {
-    Author.findOneAndUpdate({_id: req.params.id}, req.body, {new:true})
+    // To have findOneAndUpdate show validations you have to add "runValidators:true" see the end of line 26
+    Author.findOneAndUpdate({_id: req.params.id}, req.body, {new:true, runValidators:true})
     .then(updatedAuthor => res.json(updatedAuthor))
-    .catch(err => res.json(err));
+    .catch(err => res.status(400).json(err));
 }
 
 module.exports.deleteAuthor = (req, res) => {

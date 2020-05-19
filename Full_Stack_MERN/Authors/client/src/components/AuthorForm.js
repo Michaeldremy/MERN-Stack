@@ -15,7 +15,7 @@ export default props => {
     return(
         <div className="container">
             <form onSubmit ={onSubmitHandler}>
-                <div className="row text-center pt-4">
+                <div className="row text-center pt-3">
                     <div className="col-12 text-center">
                         <label>Author Name: </label>
                         <input type="text" 

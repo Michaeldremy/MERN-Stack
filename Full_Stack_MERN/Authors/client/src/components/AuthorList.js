@@ -3,9 +3,7 @@ import axios from 'axios';
 import DeleteButton from './DeleteButton';
 import {Link} from '@reach/router';
 
-export default props => {
-
-    const {removeFromDom} = props;
+export default () => {
 
     const [author, setAuthor] = useState([]);
 
@@ -13,6 +11,10 @@ export default props => {
         axios.get('http://localhost:8000/api/author')
         .then(res => setAuthor(res.data))
     }, [])
+
+    const removeFromDom = authorId => {
+        setAuthor(author.filter(author => author._id !== authorId));
+    }
 
     return(
         <div>
