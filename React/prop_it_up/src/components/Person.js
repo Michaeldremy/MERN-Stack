@@ -6,10 +6,12 @@ const Person = props => {
     const [state, setState] = useState({
         age: props.age
     });
+
     const handleAgeClick = () => {
         setState({
             age: state.age + 1
         });
+        console.log(state.age)
     }
     return (
         <div>

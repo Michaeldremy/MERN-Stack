@@ -1,36 +1,38 @@
 // Don't forget to change the enterName on line 2!
-// const {enterName} = require('../models/Belt.model');
+const {Project} = require('../models/Belt.model');
 
 // DON'T FORGET TO CHANGE THE NAMES! ESPECIALLY THE ONES IN THE PARENTHESIS
-module.exports.createAuthor = (req, res) => {
-    const {name} = req.body;
-    Author.create({
-        name
+module.exports.createProject = (req, res) => {
+    const {name, date, status} = req.body;
+    Project.create({
+        name,
+        date,
+        status
     })
-    .then(author => res.json(author))
-    .catch(err => res.status(400).json(err));
-}
-
-module.exports.getAllAuthors = (req, res) => {
-    Author.find({})
-    .then(authors => res.json(authors))
+    .then(project => res.json(project))
     .catch(err => res.json(err));
 }
 
-module.exports.getOneAuthor = (req, res) => {
-    Author.findOne({_id: req.params.id})
-    .then(author => res.json(author))
+module.exports.getAllProjects = (req, res) => {
+    Project.find({})
+    .then(projects => res.json(projects))
     .catch(err => res.json(err));
 }
 
-module.exports.updateAuthor = (req, res) => {
-    Author.findOneAndUpdate({_id: req.params.id}, req.body, {new:true, runValidators:true})
-    .then(updatedAuthor => res.json(updatedAuthor))
+module.exports.updateProject = (req, res) => {
+    Project.findOneAndUpdate({_id: req.params.id}, req.body, {new:true})
+    .then(updatedProject => res.json(updatedProject))
     .catch(err => res.status(400).json(err));
 }
 
-module.exports.deleteAuthor = (req, res) => {
-    Author.deleteOne({_id: req.params.id})
+module.exports.getOneProject = (req, res) => {
+    Project.findOne({_id: req.params.id})
+    .then(project => res.json(project))
+    .catch(err => res.json(err));
+}
+
+module.exports.deleteProject = (req, res) => {
+    Project.deleteOne({_id: req.params.id})
     .then(deleteConfirmation => res.json(deleteConfirmation))
     .catch(err => res.json(err))
 }
